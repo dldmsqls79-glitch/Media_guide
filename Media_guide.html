@@ -1,0 +1,2185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>매체 가이드 모음.zip</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+  <!-- ag-psd: 브라우저에서 아트보드 포함 PSD 파일 생성 (전역 agPsd) -->
+  <script src="https://cdn.jsdelivr.net/npm/ag-psd@31.0.2/dist/bundle.js"></script>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #f8f9fb;
+      --surface: #ffffff;
+      --text: #1a1d26;
+      --text-muted: #6b7280;
+      --border: #e8eaef;
+      --shadow: 0 2px 8px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+      --shadow-hover: 0 8px 24px rgba(15, 23, 42, 0.1), 0 2px 6px rgba(15, 23, 42, 0.05);
+      --preview-bg: #e5e7eb;
+      --preview-border: #d1d5db;
+      --radius: 14px;
+      --radius-sm: 8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .header h1 {
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      font-weight: 400;
+    }
+
+    /* Section */
+    .section {
+      margin-bottom: 52px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 22px;
+      padding: 8px 12px;
+      margin-left: -12px;
+      margin-right: -12px;
+      border-radius: var(--radius-sm);
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s ease;
+    }
+
+    .section-header:hover {
+      background: var(--surface);
+    }
+
+    .section-chev-wrap {
+      margin-left: 10px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .section-header:hover .section-chev-wrap {
+      background: #fff;
+      border-color: var(--text-muted);
+    }
+
+    .section-chev {
+      font-size: 1.3rem;
+      line-height: 1;
+      color: var(--text-muted);
+      transition: transform 0.2s ease, color 0.15s ease;
+    }
+
+    .section-header:hover .section-chev {
+      color: var(--text);
+    }
+
+    .section.collapsed .section-chev {
+      transform: rotate(-90deg);
+    }
+
+    .section-body {
+      overflow: hidden;
+    }
+
+    .section.collapsed .section-body {
+      display: none;
+    }
+
+    .section-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .section-count {
+      margin-left: auto;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Verification status badge */
+    .status-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .status-ok {
+      color: #047a43;
+      background: #e8f9f0;
+      border: 1px solid #c4ecd6;
+    }
+
+    .status-tbd {
+      color: #b45309;
+      background: #fef3c7;
+      border: 1px solid #fde68a;
+    }
+
+    .status-std {
+      color: #1d4ed8;
+      background: #eff4ff;
+      border: 1px solid #c9d9fb;
+    }
+
+    .section-meta {
+      margin: -10px 0 20px;
+      padding: 14px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    .section-meta strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* Product group (within a section) */
+    .group {
+      margin-top: 28px;
+    }
+
+    .group:first-of-type {
+      margin-top: 4px;
+    }
+
+    .group-header {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 4px 10px;
+      margin-bottom: 13px;
+    }
+
+    .group-title {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .group-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Card grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 18px;
+    }
+
+    /* Card */
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+    }
+
+    .preview-wrap {
+      width: 100%;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .preview {
+      background: var(--preview-bg);
+      border: 1.5px dashed var(--preview-border);
+      border-radius: var(--radius-sm);
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    /* Real example thumbnail (e.g. Kakao Bizboard types) */
+    .preview-img {
+      width: 100%;
+      height: auto;
+      max-height: 100%;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      object-fit: cover;
+    }
+
+    .size {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 32px;
+      transform: translateX(-50%) translateY(12px);
+      z-index: 100;
+      padding: 10px 20px;
+      background: var(--text);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 999px;
+      box-shadow: var(--shadow-hover);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .name {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .note {
+      margin-top: 6px;
+      font-size: 0.75rem;
+      color: #9ca3af;
+      text-align: center;
+      line-height: 1.45;
+    }
+
+    /* PSD download button */
+    .psd-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 10px;
+      width: 124px;
+      padding: 7px 0;
+      box-sizing: border-box;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #1f2937;
+      background: #eef2ff;
+      border: 1px solid #dadffb;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+    }
+
+    .psd-btn:hover {
+      background: #e0e7ff;
+      border-color: #c3cbfa;
+      transform: translateY(-1px);
+    }
+
+    .psd-btn svg {
+      width: 13px;
+      height: 13px;
+      flex-shrink: 0;
+    }
+
+    /* Production guide (accordion) */
+    .guide-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      padding: 8px 16px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #047a43;
+      background: #e8f9f0;
+      border: 1px solid #c4ecd6;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.15s ease;
+      font-family: inherit;
+    }
+
+    .guide-btn:hover { background: #d6f3e5; }
+
+    .guide-btn .chev { transition: transform 0.2s ease; font-size: 0.7rem; }
+    .guide-btn[aria-expanded="true"] .chev { transform: rotate(180deg); }
+
+    /* Per-size guide button (on card) */
+    .size-guide-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 10px;
+      width: 124px;
+      padding: 7px 0;
+      box-sizing: border-box;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #047a43;
+      background: #e8f9f0;
+      border: 1px solid #c4ecd6;
+      border-radius: 999px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.15s ease;
+    }
+    .size-guide-btn:hover { background: #d6f3e5; }
+    .size-guide-btn .chev { transition: transform 0.2s ease; font-size: 0.9rem; position: relative; top: -1.5px; }
+    .size-guide-btn[aria-expanded="true"] .chev { transform: rotate(180deg); }
+    .size-guide-btn[aria-expanded="true"] { background: #047a43; color: #fff; border-color: #047a43; }
+
+    /* Artboard cart button (on card) */
+    .cart-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      margin-top: 10px;
+      width: 124px;
+      padding: 7px 0;
+      box-sizing: border-box;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #4b5563;
+      background: #fff;
+      border: 1px dashed #c7cdd8;
+      border-radius: 999px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    }
+    .cart-btn:hover { background: #f3f4f6; border-color: #9aa3b2; color: var(--text); }
+    .cart-btn.added { background: var(--text); color: #fff; border: 1px solid var(--text); }
+
+    /* Artboard cart bar (fixed bottom) */
+    .cartbar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 60;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 20px;
+      background: #fff;
+      border-top: 1px solid var(--border);
+      box-shadow: 0 -6px 24px rgba(15, 23, 42, 0.08);
+    }
+    .cartbar[hidden] { display: none; }
+
+    .cart-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .cart-chips {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      flex: 1;
+      padding: 2px 0;
+    }
+    .cart-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 11px;
+      background: #f3f4f6;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+    .cart-chip button {
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: #9ca3af;
+      font-size: 0.8rem;
+      padding: 0;
+      line-height: 1;
+      font-family: inherit;
+    }
+    .cart-chip button:hover { color: #ef4444; }
+
+    .cart-input {
+      width: 108px;
+      padding: 8px 13px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text);
+      background: var(--bg);
+      outline: none;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+    .cart-input:focus { border-color: #9aa3b2; background: #fff; }
+    .cart-input::placeholder { color: #9ca3af; font-weight: 500; }
+
+    .cart-input-date {
+      width: 88px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .cart-clear {
+      border: none;
+      background: none;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+    .cart-clear:hover { color: #ef4444; }
+
+    .cart-dl {
+      border: none;
+      background: var(--text);
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 9px 18px;
+      border-radius: 999px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.15s ease;
+    }
+    .cart-dl:hover { opacity: 0.85; }
+
+    body.cart-open { padding-bottom: 72px; } /* 바구니 바에 푸터 안 가리게 */
+    body.cart-open .toast { bottom: 96px; }
+
+    @media (max-width: 640px) {
+      .cartbar { flex-wrap: wrap; gap: 10px; padding: 10px 14px; }
+      .cart-chips { flex-basis: 100%; order: 3; }
+    }
+
+    .guide-panel {
+      margin-top: 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: #fbfcfe;
+      padding: 26px 28px;
+      display: none;
+    }
+
+    .guide-panel.open { display: block; }
+
+    .guide-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    @media (max-width: 720px) {
+      .guide-body { grid-template-columns: 1fr; gap: 22px; }
+    }
+
+    .guide-sec h4 {
+      font-size: 0.95rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #03c75a;
+      display: inline-block;
+    }
+
+    .spec-block { margin-bottom: 18px; }
+    .spec-block:last-child { margin-bottom: 0; }
+
+    .spec-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 7px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-req, .badge-rec {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #fff;
+      padding: 1px 7px;
+      border-radius: 999px;
+    }
+    .badge-req { background: #ef4444; }
+    .badge-rec { background: #6366f1; }
+
+    .spec-block ul {
+      list-style: none;
+      font-size: 0.82rem;
+      color: #374151;
+      line-height: 1.75;
+    }
+    .spec-block li::before { content: "· "; color: #9ca3af; }
+    .spec-block p,
+    .guide-sec > p {
+      font-size: 0.82rem;
+      color: #4b5563;
+      line-height: 1.65;
+      margin-top: 8px;
+    }
+    .spec-block .hl { color: #ef4444; font-weight: 600; }
+    .spec-block strong { color: var(--text); font-weight: 600; }
+
+    .swatches { display: flex; gap: 8px; margin-top: 10px; }
+    .swatches span {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .guide-img {
+      display: block;
+      max-width: 200px;
+      width: 100%;
+      margin-top: 10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .guide-img.wide { max-width: 100%; }
+    .guide-img-cap {
+      margin-top: 5px;
+      font-size: 0.7rem;
+      color: #9ca3af;
+    }
+
+    /* Example images (03) — full-width row */
+    .guide-sec.full { grid-column: 1 / -1; }
+
+    /* 반려 사례 메모 — 공식 가이드 아님, 실전 반려 기록용 포스트잇 */
+    .memo-box {
+      grid-column: 1 / -1;
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-left: 4px solid #f59e0b;
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+    }
+
+    .memo-box .memo-title {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #92400e;
+      margin-bottom: 6px;
+    }
+
+    .memo-box .memo-title .memo-sub {
+      font-weight: 500;
+      color: #b45309;
+      font-size: 0.76rem;
+    }
+
+    .memo-box ul {
+      list-style: none;
+      font-size: 0.85rem;
+      color: #78350f;
+    }
+
+    .memo-box ul li {
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .memo-box ul li::before {
+      content: "·";
+      position: absolute;
+      left: 4px;
+      font-weight: 700;
+    }
+
+    .ex-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .ex-fig {
+      flex: 1 1 280px;
+      max-width: 360px;
+    }
+    .ex-fig img {
+      display: block;
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .ex-fig figcaption {
+      margin-top: 6px;
+      font-size: 0.72rem;
+      color: #9ca3af;
+    }
+
+    /* Platform colors */
+    .badge-google { background: linear-gradient(135deg, #4285f4, #34a853); }
+    .badge-meta   { background: linear-gradient(135deg, #1877f2, #833ab4); }
+    .badge-moloco { background: linear-gradient(135deg, #ff6b35, #f7931e); }
+    .badge-kakao  { background: linear-gradient(135deg, #fee500, #f5c800); color: #3c1e1e; }
+    .badge-naver  { background: linear-gradient(135deg, #03c75a, #00a84d); }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 480px) {
+      .page {
+        padding: 32px 16px 60px;
+      }
+
+      .card-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 14px;
+      }
+
+      .card {
+        padding: 16px;
+      }
+
+      .preview-wrap {
+        height: 100px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <h1>매체 가이드 모음.zip</h1>
+      <p>매체별 대표 배너 규격을 한눈에 확인하세요</p>
+    </header>
+
+    <main id="app"></main>
+
+    <footer class="footer">
+      필요한 매체·사이즈가 없다면 <strong>경은 (디자인1팀)</strong>에게 요청해 주세요. 확인 후 업데이트하겠습니다.
+    </footer>
+  </div>
+
+  <div class="cartbar" id="cartbar" hidden>
+    <span class="cart-title">아트보드 <span id="cartCount">0</span>개</span>
+    <div class="cart-chips" id="cartChips"></div>
+    <input class="cart-input cart-input-date" id="cartDate" type="text" placeholder="날짜" spellcheck="false">
+    <input class="cart-input" id="cartBrand" type="text" placeholder="브랜드명" spellcheck="false">
+    <input class="cart-input" id="cartAppeal" type="text" placeholder="소구점" spellcheck="false">
+    <button class="cart-clear" type="button" onclick="clearCart()">비우기</button>
+    <button class="cart-dl" type="button" onclick="downloadPsd()">PSD 다운로드</button>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // M 피드 공통(사이즈 무관) 가이드 — 각 사이즈 패널에서 재사용
+    const MFEED_LIMIT = (extra = "") => `
+      <div class="spec-block">
+        <div class="spec-label">제한 <span class="badge-req">필수</span></div>
+        <ul>
+          <li>이미지 내 텍스트 면적은 전체의 <strong>최대 20%</strong></li>
+          <li>메인 이미지 테두리 삽입 불가</li>
+          <li>여백에 흰색·미색 바탕 사용 불가 (영역 가득 채움)</li>
+          ${extra}
+        </ul>
+      </div>`;
+    const MFEED_TEXT = (extra = "") => `
+      <div class="guide-sec">
+        <h4>02. 텍스트 가이드</h4>
+        <div class="spec-block">
+          <div class="spec-label">글자수</div>
+          <ul>
+            <li>프로필 이름 : 최대 19자 (띄어쓰기 포함)</li>
+            <li>광고 문구 : 최대 65자 (띄어쓰기 포함)</li>
+            ${extra}
+          </ul>
+        </div>
+        <div class="spec-block">
+          <div class="spec-label">규칙</div>
+          <p>특수문자는 의미 전달에 필요한 경우만 사용. 문장부호는 가능하나 물결(~) 외에는 2개 이상 연속 불가. 행동 유도 버튼은 시스템에서 레이블 선택(더 알아보기 등), '버튼없음'도 선택 가능합니다.</p>
+        </div>
+      </div>`;
+
+    // 스마트채널 DA — 공통(사이즈 무관) 가이드. 사이즈별 패널에서 재사용
+    const SC_COMMON = `
+      <div class="guide-sec">
+        <h4>02. 텍스트 가이드</h4>
+        <div class="spec-block">
+          <div class="spec-label">광고 카피</div>
+          <ul>
+            <li>최대 2줄, 각 줄 텍스트 높이 일정하게</li>
+            <li>1줄 사용 시 텍스트 최대 높이 30px (Bold)</li>
+            <li>심의필은 최대 2줄까지 가능</li>
+            <li>오브젝트–텍스트 간격 30px 이상, 꺾쇠 아이콘 사용 시 40px 이상</li>
+          </ul>
+        </div>
+        <div class="spec-block">
+          <div class="spec-label">행동 유도 문구</div>
+          <p>띄어쓰기 포함 총 10자 이하로 직접 입력해 제작할 수 있습니다.</p>
+        </div>
+      </div>
+      <div class="guide-sec full">
+        <h4>03. 제작 참고</h4>
+        <div class="ex-row">
+          <figure class="ex-fig">
+            <img src="assets/img/smartchannel-guide-compose.png" alt="스마트채널 DA 제작 구성 — 투명 배경 / 오브젝트·텍스트·랜딩아이콘" loading="lazy">
+            <figcaption>제작 구성 · 투명 배경 + 오브젝트·텍스트·랜딩아이콘</figcaption>
+          </figure>
+          <figure class="ex-fig">
+            <img src="assets/img/smartchannel-guide-spacing.png" alt="스마트채널 DA 여백 및 간격 값 — 좌우 40px, 오브젝트-텍스트 30px" loading="lazy">
+            <figcaption>여백·간격 · 좌우 40px / 오브젝트–텍스트 30px</figcaption>
+          </figure>
+          <figure class="ex-fig">
+            <img src="assets/img/smartchannel-logo.png" alt="스마트채널 DA 로고 위치 — 영역 내 상하 14px, 좌우 40px 여백" loading="lazy">
+            <figcaption>로고 위치 · 영역 내 상·하 14px / 좌·우 40px 여백</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="guide-sec full">
+        <h4>04. 노출 예시</h4>
+        <div class="ex-row">
+          <figure class="ex-fig" style="max-width:640px">
+            <img src="assets/img/examples/ex-smartchannel-exposure.png" alt="스마트채널 DA 메인 홈 노출 예시" loading="lazy">
+            <figcaption>메인 홈 노출 예시 · 검색창 하단 영역</figcaption>
+          </figure>
+        </div>
+      </div>`;
+    const SC_DETAILS = (size, objArea, thumb) => `
+      <div class="guide-sec">
+        <h4>01. 오브젝트 가이드</h4>
+        <div class="spec-block">
+          <div class="spec-label">Size <span class="badge-req">필수</span></div>
+          <ul>
+            <li>제작 사이즈 : <span class="hl">${size} px</span></li>
+            <li>파일 포맷 : PNG (투명 배경 처리 필수)</li>
+            <li>파일 용량 : 최대 150KB</li>
+            <li>전달되는 샘플 PSD를 활용해 제작</li>
+          </ul>
+        </div>
+        <div class="spec-block">
+          <div class="spec-label">오브젝트 <span class="badge-req">필수</span></div>
+          <ul>
+            <li>오브젝트 허용 영역 ${objArea} · <strong>실사용 최대 70%</strong></li>
+            <li>인물·캐릭터 3개 이상이면 가로폭 최대 280px까지 허용</li>
+            <li>로고 최소 면적 500px (유통업종은 판매처 로고/업체명 필수)</li>
+            <li>썸네일형 ${thumb} (1.5:1)</li>
+          </ul>
+        </div>
+      </div>
+      ${SC_COMMON}`;
+
+    // 카카오 비즈보드 — 유형별 가이드에서 공통으로 재사용하는 블록 (2025.07 PSD 완화 가이드)
+    const KBB_COPY = `
+      <div class="guide-sec">
+        <h4>02. 카피 가이드</h4>
+        <div class="spec-block">
+          <div class="spec-label">종류 <span class="badge-req">필수</span></div>
+          <ul>
+            <li>메인카피 : Pretendard <strong>Bold</strong> · #4C4C4C · 51~39pt · 최대 1줄</li>
+            <li>서브카피 : Pretendard Regular · #555555 / #777777 · 51~39pt · 최대 1줄</li>
+            <li>부가정보 : Pretendard Regular · #999999 · <strong>18pt 고정</strong> · 최대 2줄</li>
+          </ul>
+        </div>
+        <div class="spec-block">
+          <div class="spec-label">규칙 <span class="badge-req">필수</span></div>
+          <ul>
+            <li>카피 최대 3줄 (부가정보 사용 시 4줄)</li>
+            <li>오브젝트 <strong>위·아래에 카피 배치 불가</strong> (좌·우 구성만)</li>
+            <li>정렬은 좌 / 우 / 중앙 중 한 가지로 통일</li>
+            <li>기울기·왜곡·자간·장평 등 폰트 변형 불가</li>
+          </ul>
+        </div>
+      </div>`;
+    const KBB_CTA = `
+      <div class="guide-sec">
+        <h4>03. CTA 버튼 (택1)</h4>
+        <div class="spec-block">
+          <div class="spec-label">유형 <span class="badge-req">필수</span></div>
+          <ul>
+            <li>기본꺾쇠형 · 원형(꺾쇠/다운로드) · 버튼형 · 앱다운로드형 중 <strong>1개</strong></li>
+            <li>기본꺾쇠형·원형·버튼형은 <strong>좌측 오브젝트형에서만</strong> 사용 (앱다운로드형은 우측 오브젝트형도 가능)</li>
+            <li>버튼 색상·형태·위치·크기 변경 불가</li>
+            <li>버튼–카피 최소 여백 <span class="hl">36px</span></li>
+            <li>버튼형 CTA명은 명확한 액션 단어 4글자 (구매하기·다운로드 등)</li>
+          </ul>
+        </div>
+        <div class="spec-block">
+          <div class="spec-label">카피형 CTA</div>
+          <p>버튼 대신 문구+꺾쇠(Pretendard 26pt 고정 · #777777 · 최대 1줄)로도 사용 가능. 사용 시 다른 강조 효과는 최대 1개(미사용 권장).</p>
+        </div>
+      </div>`;
+    const KBB_EMPH = `
+      <div class="guide-sec">
+        <h4>04. 강조 효과 (최대 1개)</h4>
+        <div class="spec-block">
+          <ul>
+            <li>혜택 강조카피(폰트) 또는 배지 중 <strong>택1 · 배너 내 최대 1개</strong></li>
+            <li>가격·할인율 등 명사형 혜택 <strong>1개 어절</strong>만 강조 (00원 · 00% · 특가 · 1+1)</li>
+            <li>카피 최상단 혹은 최하단에 배치</li>
+            <li>배지는 플랫 형태 · 텍스트 외 그래픽 불가 (특수기호 % ! + 만)</li>
+            <li>가독성 낮은 컬러(고채도 원색·형광색) 사용 불가</li>
+          </ul>
+        </div>
+      </div>`;
+
+    // 카카오모먼트 디스플레이 — 배너 특수 사이즈(띠배너·1200×600) 재사용 블록 (ver1.4 가이드)
+    const KMN_BAND = `
+      <div class="guide-sec">
+        <h4>띠배너 특수 규칙</h4>
+        <div class="spec-block">
+          <div class="spec-label">가로 모드 <span class="badge-req">필수</span></div>
+          <ul>
+            <li>이미지 좌·우 끝 <span class="hl">1px은 동일한 단색</span> — 배경과 자연스럽게 이어지게 (모자란 폭은 이 색으로 채워짐)</li>
+            <li>모바일 가로 모드 고려 — 좌우가 잘리거나 끊겨 보이는 이미지 불가</li>
+            <li>배경 있으면 좌·우 끝 1px 단색으로 자연스럽게 그라데이션 처리</li>
+            <li>m.Daum 지면과 구분 안 되는 회색 배경 불가 (#fbfbfb·#e9eaeb·#e4e6e7·#ffffff 권장)</li>
+          </ul>
+        </div>
+        <figure class="ex-fig" style="max-width:100%;margin-top:4px"><img src="assets/img/examples/kakao-native-band.png" alt="띠배너 참고 — 좌·우 끝 1px 배경색" loading="lazy"><figcaption>좌·우 끝 1px을 동일한 배경색으로 (모자란 폭은 이 색으로 채워짐)</figcaption></figure>
+      </div>`;
+    const KMN_BG1200 = `
+      <div class="guide-sec">
+        <h4>배경색 특수 규칙</h4>
+        <div class="spec-block">
+          <div class="spec-label">1200×600 전용 <span class="badge-req">필수</span></div>
+          <ul>
+            <li>m.Daum 지면과 육안으로 구분되지 않는 <span class="hl">회색 배경 사용 불가</span></li>
+            <li>#fbfbfb · #e9eaeb · #e4e6e7 · #ffffff 사용 권장</li>
+          </ul>
+        </div>
+      </div>`;
+
+    const platforms = [
+      {
+        id: "google",
+        name: "Google",
+        badgeClass: "badge-google",
+        standard: true, // IAB 업계 표준 디스플레이 규격 — 별도 제작 가이드 없음
+        guide: "<strong>IAB 표준 디스플레이 규격</strong> · 매체 전용 제작 가이드나 파일 용량 제한이 따로 없습니다. 표준 사이즈에 맞춰 자유롭게 제작하세요.",
+        banners: [
+          { w: 300,  h: 250,  name: "중형 직사각형", token: "중형직사각형" },
+          { w: 728,  h: 90,   name: "리더보드", token: "리더보드" },
+          { w: 320,  h: 100,  name: "모바일 배너", token: "모바일배너" },
+          { w: 160,  h: 600,  name: "와이드 스카이스크래퍼", token: "와이드스카이스크래퍼" },
+          { w: 300,  h: 600,  name: "하프 페이지", token: "하프페이지" },
+          { w: 970,  h: 250,  name: "빌보드", token: "빌보드" },
+        ],
+      },
+      {
+        id: "meta",
+        name: "Meta",
+        badgeClass: "badge-meta",
+        verified: true,
+        guide: "<strong>Meta 이미지 광고</strong> · 파일 형식 JPG/PNG · 용량 최대 30MB(넉넉해 사실상 제한 없음) · <strong>세로형 9:16(스토리·릴스)만 세이프티존</strong> 적용",
+        banners: [
+          { w: 1440, h: 1440, name: "정사각형 피드", token: "정사각형피드" },
+          { w: 1440, h: 1800, name: "세로 피드 (4:5)", token: "세로피드" },
+          {
+            w: 1440, h: 2560, name: "스토리 / 릴스 (9:16)", token: "스토리릴스",
+            safe: { t: 358, b: 896, l: 86, r: 86 },
+            details: `
+              <div class="guide-sec">
+                <h4>세이프티존 (1440×2560)</h4>
+                <div class="spec-block">
+                  <div class="spec-label">여백 <span class="badge-req">필수</span></div>
+                  <ul>
+                    <li>상단 : <span class="hl">358px</span> (14%)</li>
+                    <li>하단 : <span class="hl">896px</span> (35%)</li>
+                    <li>좌·우 : 각 <span class="hl">86px</span> (6%)</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="guide-sec">
+                <h4>배치 가이드</h4>
+                <div class="spec-block">
+                  <p>텍스트·로고·CTA 등 핵심 요소는 위 여백을 피해 <strong>가운데 안전 영역</strong>에 배치하세요.</p>
+                  <p>상·하단에는 인스타그램 UI(프로필·캡션·버튼·하단 내비게이션)가, 우측에는 액션 아이콘(좋아요·댓글·공유)이 겹칩니다.</p>
+                  <p>PSD 아트보드 생성 시 이 세이프티존이 <span class="hl">빨간 영역</span>으로 표시됩니다.</p>
+                </div>
+              </div>`,
+          },
+          { w: 1200, h: 628,  name: "링크 공유", token: "링크공유" },
+        ],
+      },
+      {
+        id: "moloco",
+        name: "Moloco",
+        badgeClass: "badge-moloco",
+        verified: true,
+        guide: "<strong>Moloco 이미지 광고</strong> · 파일 형식 JPEG/JPG/PNG/GIF · 용량 각 최대 500KB",
+        groups: [
+          {
+            title: "배너 (Banner / Medium)",
+            banners: [
+              { w: 320, h: 50,  name: "배너", token: "배너", note: "JPG/PNG/GIF · 500KB 이하" },
+              { w: 640, h: 100, name: "배너 (와이드)", token: "배너와이드", note: "JPG/PNG/GIF · 500KB 이하" },
+              { w: 320, h: 100, name: "배너 (라지)", token: "배너라지", note: "JPG/PNG/GIF · 500KB 이하" },
+              { w: 300, h: 250, name: "미디엄 (직사각형)", token: "미디엄", note: "JPG/PNG/GIF · 500KB 이하" },
+            ],
+          },
+          {
+            title: "전면 (Full Screen)",
+            banners: [
+              { w: 320, h: 480, name: "전면 (세로)", token: "전면세로", note: "JPG/PNG/GIF · 500KB 이하" },
+              { w: 320, h: 568, name: "전면 (세로 롱)", token: "전면세로롱", note: "JPG/PNG/GIF · 500KB 이하" },
+              { w: 480, h: 320, name: "전면 (가로)", token: "전면가로", note: "JPG/PNG/GIF · 500KB 이하" },
+            ],
+          },
+          {
+            title: "태블릿 (Tablet)",
+            banners: [
+              { w: 728, h: 90, name: "리더보드 (태블릿)", token: "리더보드", note: "JPG/PNG/GIF · 500KB 이하" },
+            ],
+          },
+          {
+            title: "카카오 인벤토리",
+            banners: [
+              { w: 1200, h: 600, name: "카카오 인벤토리", token: "카카오인벤토리", note: "JPG/PNG · 500KB 이하" },
+            ],
+          },
+        ],
+      },
+      {
+        id: "kakao",
+        name: "Kakao",
+        badgeClass: "badge-kakao",
+        verified: true,
+        guide: "<strong>카카오 광고 소재</strong> · <strong>비즈보드</strong>와 <strong>카카오모먼트 디스플레이(네이티브·배너)</strong> 상품별 가이드입니다. 만들 유형·사이즈의 '제작 가이드'에서 상세 규격을 확인하세요.",
+        groups: [
+          {
+            title: "비즈보드",
+            note: "공통 제작 사이즈 1029×258 (PSD 템플릿 제작) · 광고주체(로고/브랜드명) 표기 필수 · 텍스트–이미지 겹침 금지(카피–오브젝트 간격 최소 33px)",
+            banners: [
+          {
+            w: 1029, h: 258, name: "오브젝트형", token: "비즈보드_오브젝트형",
+            img: "assets/img/examples/kakao-object.png",
+            note: "누끼 오브젝트 + 카피",
+            psd: "https://drive.google.com/uc?export=download&id=1o9_xejkI7DOkUedkfbAnckuwYBn59OKo",
+            details: `
+              <div class="guide-sec">
+                <h4>01. 구성 가이드 — 오브젝트형</h4>
+                <div class="spec-block">
+                  <div class="spec-label">영역 <span class="badge-req">필수</span></div>
+                  <ul>
+                    <li>오브젝트 영역 : 933×258 (영역 내 자유 구성)</li>
+                    <li>오브젝트 최대 크기 : <span class="hl">438×258</span></li>
+                    <li>오브젝트–카피 최소 간격 : <span class="hl">33px</span></li>
+                  </ul>
+                </div>
+                <div class="spec-block">
+                  <div class="spec-label">배치</div>
+                  <ul>
+                    <li>좌측 / 우측 / 중앙 배치 · 한쪽 치우침 주의</li>
+                    <li>좌측 오브젝트형은 꺾쇠 CTA 활용 가능</li>
+                    <li>기본 우측 오브젝트형은 텍스트 시작점 준수 권장</li>
+                  </ul>
+                </div>
+              </div>
+              ${KBB_COPY}
+              ${KBB_CTA}
+              ${KBB_EMPH}
+              <div class="guide-sec full">
+                <h4>05. 활용 예시</h4>
+                <img class="guide-img wide" src="assets/img/examples/kakao-ex-object.png" alt="오브젝트형 활용 예시 — 좌/우/중앙 배치" loading="lazy">
+              </div>`,
+          },
+          {
+            w: 1029, h: 258, name: "썸네일형", token: "비즈보드_썸네일형",
+            img: "assets/img/examples/kakao-thumbnail.png",
+            note: "사각 썸네일 이미지 + 카피",
+            psd: "https://drive.google.com/uc?export=download&id=1o9_xejkI7DOkUedkfbAnckuwYBn59OKo",
+            details: `
+              <div class="guide-sec">
+                <h4>01. 구성 가이드 — 썸네일형</h4>
+                <div class="spec-block">
+                  <div class="spec-label">영역 <span class="badge-req">필수</span></div>
+                  <ul>
+                    <li>썸네일 최대 크기 : <span class="hl">438×258</span> 안에서 구성</li>
+                    <li>상·하 여백 없이 이미지로 영역 전체를 채우는 것 불가</li>
+                    <li>인지 가능한 고품질 이미지 · 잘리거나 훼손된 이미지 불가</li>
+                  </ul>
+                </div>
+              </div>
+              ${KBB_COPY}
+              ${KBB_CTA}
+              ${KBB_EMPH}
+              <div class="guide-sec full">
+                <h4>05. 활용 예시</h4>
+                <img class="guide-img wide" src="assets/img/examples/kakao-ex-thumbnail.png" alt="썸네일형 활용 예시" loading="lazy">
+              </div>`,
+          },
+          {
+            w: 1029, h: 258, name: "텍스트(카피)형", token: "비즈보드_텍스트형",
+            img: "assets/img/examples/kakao-text.png",
+            note: "카피 중심 · 이미지 최소",
+            psd: "https://drive.google.com/uc?export=download&id=1o9_xejkI7DOkUedkfbAnckuwYBn59OKo",
+            details: `
+              <div class="guide-sec">
+                <h4>01. 구성 가이드 — 텍스트(카피)형</h4>
+                <div class="spec-block">
+                  <div class="spec-label">영역 <span class="badge-req">필수</span></div>
+                  <ul>
+                    <li>카피 영역 : 933×156</li>
+                    <li>오브젝트 없이 <strong>카피 단독 구성 가능</strong></li>
+                    <li>카피 최대 3줄 (부가정보 사용 시 4줄)</li>
+                  </ul>
+                </div>
+              </div>
+              ${KBB_COPY}
+              ${KBB_CTA}
+              ${KBB_EMPH}
+              <div class="guide-sec full">
+                <h4>05. 활용 예시</h4>
+                <img class="guide-img wide" src="assets/img/examples/kakao-ex-text.png" alt="텍스트(카피)형 활용 예시" loading="lazy">
+              </div>`,
+          },
+          {
+            w: 1029, h: 258, name: "커스텀형", token: "비즈보드_커스텀형",
+            img: "assets/img/examples/kakao-custom.png",
+            note: "배경 이미지 꽉 채움 · PSD 완화",
+            psd: "https://drive.google.com/uc?export=download&id=1o9_xejkI7DOkUedkfbAnckuwYBn59OKo",
+            details: `
+              <div class="guide-sec">
+                <h4>01. 구성 가이드 — 커스텀형 (PSD 완화)</h4>
+                <div class="spec-block">
+                  <div class="spec-label">배경 / CTA</div>
+                  <ul>
+                    <li>배경 이미지를 꽉 채우는 형태 가능</li>
+                    <li>CTA는 위치·형태 유지, <strong>배경에 맞춰 폰트·버튼 컬러·투명도 조정 가능</strong> (가독성 확보 필수)</li>
+                  </ul>
+                </div>
+                <div class="spec-block">
+                  <div class="spec-label">혜택 강조카피</div>
+                  <ul>
+                    <li>혜택 문구에 <strong>컬러 사용 불가</strong> → 투명도·굵기만 조정</li>
+                    <li>배경과 조합 시 가독성 저하되는 배지 사용 불가</li>
+                  </ul>
+                </div>
+                <p>그 외 카피·CTA 등 기본 규격은 다른 유형과 동일하게 준수합니다.</p>
+              </div>
+              ${KBB_COPY}
+              <div class="guide-sec full">
+                <h4>03. 활용 예시</h4>
+                <img class="guide-img wide" src="assets/img/examples/kakao-ex-custom.png" alt="커스텀 비즈보드 활용 예시" loading="lazy">
+              </div>`,
+          },
+            ],
+          },
+          {
+            title: "카카오모먼트 · 네이티브",
+            note: "카카오톡·카카오스토리·Daum 피드 노출 · 디자이너는 홍보이미지를 제작(타이틀·문구 등은 시스템 입력) · 노출 지면에 따라 크롭·리사이징될 수 있음",
+            banners: [
+              {
+                w: 1200, h: 628, name: "이미지피드형", token: "모먼트_이미지피드",
+                note: "1200×628 · JPG/JPEG/PNG · 400KB",
+                safe: { t: 40, b: 40, l: 40, r: 40 },
+                details: `
+                  <div class="guide-sec">
+                    <h4>01. 이미지 가이드</h4>
+                    <div class="spec-block">
+                      <div class="spec-label">Size <span class="badge-req">필수</span></div>
+                      <ul>
+                        <li>제작 사이즈 : <span class="hl">1200×628 px</span></li>
+                        <li>형식 : JPG, JPEG, PNG · 용량 400KB</li>
+                      </ul>
+                    </div>
+                    <div class="spec-block">
+                      <div class="spec-label">구성 <span class="badge-rec">권장</span></div>
+                      <ul>
+                        <li>상·하·좌·우 <strong>40px 영역</strong>엔 로고·텍스트 배치 지양</li>
+                        <li>여러 개의 배너를 조합한 형태 사용 제한</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="guide-sec">
+                    <h4>03. 활용 예시</h4>
+                    <figure class="ex-fig" style="max-width:300px"><img src="assets/img/examples/kakao-native-imagefeed.png" alt="이미지피드형 활용 예시" loading="lazy"></figure>
+                  </div>
+                  <div class="guide-sec full">
+                    <h4>02. 이미지 내 텍스트</h4>
+                    <div class="spec-block">
+                      <ul>
+                        <li>이미지 내 텍스트는 폰트 측정 박스(<strong>340×220</strong>) <strong>최대 2개</strong> 안에 구성 (가로·세로 조합 가능)</li>
+                        <li>측정 박스 분할·사선 기울임 불가 · 3개 이상이면 집행 불가</li>
+                        <li>폰트 <strong>28px 미만 불가</strong> · 64~112px 권장</li>
+                        <li>심의필·저작권 표기는 30px (텍스트 측정에서 제외)</li>
+                      </ul>
+                      <figure class="ex-fig" style="max-width:480px;margin-top:12px"><img src="assets/img/examples/kakao-native-fontbox.png" alt="폰트 측정 박스 — 340×220 최대 2개" loading="lazy"></figure>
+                    </div>
+                  </div>`,
+              },
+              {
+                w: 640, h: 480, name: "썸네일피드형", token: "모먼트_썸네일피드",
+                note: "640×480 · JPG/JPEG/PNG · 300KB",
+                safe: { t: 40, b: 40, l: 40, r: 40 },
+                details: `
+                  <div class="guide-sec">
+                    <h4>01. 이미지 가이드</h4>
+                    <div class="spec-block">
+                      <div class="spec-label">Size <span class="badge-req">필수</span></div>
+                      <ul>
+                        <li>제작 사이즈 : <span class="hl">640×480 px</span></li>
+                        <li>형식 : JPG, JPEG, PNG · 용량 300KB</li>
+                      </ul>
+                    </div>
+                    <div class="spec-block">
+                      <div class="spec-label">구성 <span class="badge-rec">권장</span></div>
+                      <ul>
+                        <li>상·하·좌·우 <strong>40px 영역</strong>엔 로고·메인 오브젝트 배치 지양</li>
+                        <li>단일 이미지로 구성 (2개 이상 이미지 조합 불가)</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="guide-sec">
+                    <h4>02. 이미지 내 텍스트</h4>
+                    <div class="spec-block">
+                      <ul>
+                        <li>한글·영어·특수문자 등 <strong>모든 텍스트 사용 불가</strong></li>
+                        <li>의무고시사항은 37px로 표기 권장 (텍스트로 포함하지 않음)</li>
+                        <li>실제 제품 사진에 텍스트가 포함된 경우는 사용 가능</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="guide-sec full">
+                    <h4>03. 활용 예시</h4>
+                    <figure class="ex-fig" style="max-width:300px"><img src="assets/img/examples/kakao-native-thumbnail.png" alt="썸네일피드형 활용 예시" loading="lazy"></figure>
+                  </div>`,
+              },
+              {
+                w: 720, h: 1000, name: "전면형", token: "모먼트_전면형",
+                note: "720×1000 · JPG/JPEG/PNG · 400KB",
+                safe: { t: 0, b: 180, l: 73, r: 73 },
+                details: `
+                  <div class="guide-sec">
+                    <h4>01. 이미지 가이드</h4>
+                    <div class="spec-block">
+                      <div class="spec-label">Size <span class="badge-req">필수</span></div>
+                      <ul>
+                        <li>제작 사이즈 : <span class="hl">720×1000 px</span></li>
+                        <li>형식 : JPG, JPEG, PNG · 용량 400KB</li>
+                      </ul>
+                    </div>
+                    <div class="spec-block">
+                      <div class="spec-label">구성 <span class="badge-rec">권장</span></div>
+                      <ul>
+                        <li>좌·우 <strong>73px</strong> / 하단 <strong>180px</strong> 영역엔 로고·메인 오브젝트 배치 지양</li>
+                        <li>단일 이미지로 구성 (2개 이상 이미지 조합 불가)</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="guide-sec">
+                    <h4>02. 이미지 내 텍스트</h4>
+                    <div class="spec-block">
+                      <ul>
+                        <li>한글·영어·특수문자 등 <strong>모든 텍스트 사용 불가</strong> (로고·의무고시 제외)</li>
+                        <li>실제 제품 사진에 텍스트가 포함된 경우는 사용 가능</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="guide-sec full">
+                    <h4>03. 활용 예시</h4>
+                    <figure class="ex-fig" style="max-width:220px"><img src="assets/img/examples/kakao-native-full.png" alt="전면형 활용 예시" loading="lazy"></figure>
+                  </div>`,
+              },
+            ],
+          },
+          {
+            title: "카카오모먼트 · 배너",
+            note: "단일 이미지 · 형식 JPG/JPEG/PNG · 설명문구 최대 30자(특수문자·한자 불가) · 노출 영역에 따라 리사이징 · 등록 가능 16종",
+            banners: [
+              { w: 640,  h: 100,  name: "띠배너", token: "모먼트띠배너", note: "100KB · 좌우 1px 단색", details: KMN_BAND },
+              { w: 640,  h: 200,  name: "띠배너", token: "모먼트띠배너", note: "100KB · 좌우 1px 단색", details: KMN_BAND },
+              { w: 1200, h: 600,  name: "배너", token: "모먼트배너", note: "150KB · 배경색 주의", details: KMN_BG1200 },
+            ],
+          },
+        ],
+      },
+      {
+        id: "naver",
+        name: "Naver",
+        badgeClass: "badge-naver",
+        verified: true, // 공식 가이드 PDF 반영 완료 매체만 true
+
+        guide: "<strong>네이버 광고 상품별 제작 가이드</strong> · 모든 사이즈는 <strong>제작(원본) 사이즈</strong> 기준이며, 지면·디바이스에 따라 자동 리사이징·말줄임 처리될 수 있습니다.",
+        groups: [
+          {
+            title: "M 피드 광고",
+            note: "2025.12 · 홈피드 · 카페/밴드 피드 등 · 사이즈 카드마다 '제작 가이드'를 누르면 해당 사이즈 가이드가 열립니다",
+            banners: [
+              {
+                w: 1200, h: 1200, name: "이미지형 (1:1)", token: "M피드이미지형", safe: { t: 60, b: 60, l: 60, r: 60 }, note: "Safe Area 1080×1080 · JPG/PNG · 80KB~800KB",
+                details: `
+                  <div class="guide-sec">
+                    <h4>01. 이미지 가이드 — 이미지형 1:1</h4>
+                    <div class="spec-block">
+                      <div class="spec-label">Size <span class="badge-req">필수</span></div>
+                      <ul>
+                        <li>제작 사이즈 : <span class="hl">1200×1200 px</span> (1:1)</li>
+                        <li>Safe Area : 1080×1080 (주요 요소는 이 안에 배치)</li>
+                        <li>상·하·좌·우 <strong>필수여백 60px</strong></li>
+                        <li>파일 포맷 : JPG, JPEG, PNG (RGB)</li>
+                        <li>파일 용량 : 80KB~800KB</li>
+                      </ul>
+                    </div>
+                    ${MFEED_LIMIT()}
+                  </div>
+                  <div class="guide-sec">
+                    <h4>02. Safe Area 참고</h4>
+                    <figure class="ex-fig" style="max-width:100%">
+                      <img src="assets/img/mfeed-1to1-safearea.png" alt="M 피드 1:1 Safe Area — 1080×1080, 필수여백 60px" loading="lazy">
+                      <figcaption>파란 영역(Safe Area 1080×1080)에 주요 요소 배치 · 빨간 영역은 필수여백 60px</figcaption>
+                    </figure>
+                  </div>`,
+              },
+              {
+                w: 1200, h: 628, name: "이미지형 (16:9)", token: "M피드이미지형", safe: { t: 60, b: 60, l: 60, r: 60 }, note: "Safe Area 1080×508 · JPG/PNG · 50KB~500KB",
+                details: `
+                  <div class="guide-sec">
+                    <h4>01. 이미지 가이드 — 이미지형 16:9</h4>
+                    <div class="spec-block">
+                      <div class="spec-label">Size <span class="badge-req">필수</span></div>
+                      <ul>
+                        <li>제작 사이즈 : <span class="hl">1200×628 px</span> (16:9)</li>
+                        <li>Safe Area : 1080×508 (주요 요소는 이 안에 배치)</li>
+                        <li>상·하·좌·우 <strong>필수여백 60px</strong></li>
+                        <li>파일 포맷 : JPG, JPEG, PNG (RGB)</li>
+                        <li>파일 용량 : 50KB~500KB</li>
+                      </ul>
+                    </div>
+                    ${MFEED_LIMIT()}
+                  </div>
+                  <div class="guide-sec">
+                    <h4>02. Safe Area 참고</h4>
+                    <figure class="ex-fig" style="max-width:100%">
+                      <img src="assets/img/mfeed-16to9-safearea.png" alt="M 피드 16:9 Safe Area — 1080×508, 필수여백 60px" loading="lazy">
+                      <figcaption>파란 영역(Safe Area 1080×508)에 주요 요소 배치 · 빨간 영역은 필수여백 60px</figcaption>
+                    </figure>
+                  </div>`,
+              },
+              {
+                w: 1200, h: 1800, name: "이미지형 (2:3)", token: "M피드이미지형", safe: { t: 300, b: 300, l: 60, r: 60 }, note: "Safe Area 1080×1200 · 필수여백 60px · 100KB~1.2MB",
+                details: `
+                  <div class="guide-sec">
+                    <h4>01. 이미지 가이드 — 이미지형 2:3</h4>
+                    <div class="spec-block">
+                      <div class="spec-label">Size <span class="badge-req">필수</span></div>
+                      <ul>
+                        <li>제작 사이즈 : <span class="hl">1200×1800 px</span> (2:3)</li>
+                        <li>Safe Area : 1080×1200 · 상·하·좌·우 <strong>필수여백 60px</strong></li>
+                        <li>텍스트·상품 이미지 등 중요한 요소는 <strong>1080×1200 내에 배치</strong></li>
+                        <li>파일 포맷 : JPG, JPEG, PNG (RGB)</li>
+                        <li>파일 용량 : 100KB~1.2MB</li>
+                      </ul>
+                    </div>
+                    <div class="spec-block">
+                      <div class="spec-label">제한 <span class="badge-req">필수</span></div>
+                      <ul>
+                        <li>이미지 내 텍스트 면적은 전체의 <strong>최대 20%</strong></li>
+                        <li>메인 이미지 테두리 삽입 불가</li>
+                        <li><strong>단색 배경 이미지</strong>는 집행할 수 없습니다 (흰색·검정색·회색 등 무채색 포함)</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="guide-sec full">
+                    <h4>02. Safe Area 참고</h4>
+                    <div class="ex-row">
+                      <figure class="ex-fig" style="max-width:560px">
+                        <img src="assets/img/mfeed-2to3-safearea.png" alt="M 피드 2:3 Safe Area — 1080×1200, 필수여백 60px / 소재 예시" loading="lazy">
+                        <figcaption>좌: Safe Area(1080×1200, 필수여백 60px) · 우: SAFE AREA를 고려한 소재 예시</figcaption>
+                      </figure>
+                    </div>
+                  </div>`,
+              },
+              {
+                w: 600, h: 600, name: "컬렉션형 이미지", token: "M피드컬렉션형", safe: { t: 30, b: 30, l: 30, r: 30 }, note: "1:1 · 4~10장 등록 · JPG/PNG · 20KB~500KB",
+                details: `
+                  <div class="guide-sec">
+                    <h4>01. 이미지 가이드 — 컬렉션형</h4>
+                    <div class="spec-block">
+                      <div class="spec-label">Size <span class="badge-req">필수</span></div>
+                      <ul>
+                        <li>제작 사이즈 : <span class="hl">600×600 px</span> (1:1)</li>
+                        <li>Safe Area : 540×540 · 상·하·좌·우 <strong>필수여백 30px</strong></li>
+                        <li>파일 포맷 : JPG, JPEG, PNG (RGB)</li>
+                        <li>파일 용량 : 20KB~500KB</li>
+                      </ul>
+                    </div>
+                    ${MFEED_LIMIT()}
+                  </div>
+                  <div class="guide-sec">
+                    <h4>02. Safe Area 참고</h4>
+                    <figure class="ex-fig" style="max-width:100%">
+                      <img src="assets/img/mfeed-collection-safearea.png" alt="M 피드 컬렉션형 Safe Area — 540×540, 필수여백 30px" loading="lazy">
+                      <figcaption>파란 영역(Safe Area 540×540)에 주요 요소 배치 · 빨간 영역은 필수여백 30px</figcaption>
+                    </figure>
+                  </div>`,
+              },
+              {
+                w: 300, h: 300, name: "프로필 이미지", token: "M피드프로필", safe: { t: 27, b: 27, l: 27, r: 27 }, note: "공통 · Safe Area 246×246 · 200KB 이하",
+                details: `
+                  <div class="guide-sec">
+                    <h4>01. 이미지 가이드 — 프로필 이미지 (공통)</h4>
+                    <div class="spec-block">
+                      <div class="spec-label">Size <span class="badge-req">필수</span></div>
+                      <ul>
+                        <li>제작 사이즈 : <span class="hl">300×300 px</span> (1:1)</li>
+                        <li>Safe Area : 246×246</li>
+                        <li>상·하·좌·우 <strong>필수여백 27px</strong></li>
+                        <li>파일 포맷 : JPG, JPEG, PNG (RGB)</li>
+                        <li>파일 용량 : 200KB 이하</li>
+                      </ul>
+                      <p>광고주 대표 이미지(기업·브랜드·상품 로고 등). 모든 피드 광고 유형에 공통으로 사용됩니다.</p>
+                    </div>
+                  </div>
+                  <div class="guide-sec">
+                    <h4>02. Safe Area 참고</h4>
+                    <figure class="ex-fig" style="max-width:100%">
+                      <img src="assets/img/mfeed-profile-safearea.png" alt="M 피드 프로필 Safe Area — 246×246, 필수여백 27px" loading="lazy">
+                      <figcaption>파란 영역(Safe Area 246×246)에 로고 배치 · 빨간 영역은 필수여백 27px</figcaption>
+                    </figure>
+                  </div>`,
+              },
+            ],
+          },
+          {
+            title: "모바일 DA — 이미지형",
+            note: "2025.04 · 보장형(브랜딩DA·M통합DA) / 성과형(네이버 메인·서비스 통합) · 높이 가변 노출",
+            banners: [
+              { w: 1250, h: 560, name: "이미지형", token: "모바일DA", safe: { t: 50, b: 35, l: 240, r: 240 }, note: "2.3:1 · 소재 1개 · JPG/PNG · 50KB~250KB" },
+            ],
+            details: `
+              <div class="guide-sec">
+                <h4>01. 이미지 가이드</h4>
+                <div class="spec-block">
+                  <div class="spec-label">Size <span class="badge-req">필수</span></div>
+                  <ul>
+                    <li>제작 사이즈 : <span class="hl">1250×560 px</span> (2.3:1)</li>
+                    <li>파일 포맷 : PNG, JPG, JPEG</li>
+                    <li>파일 용량 : 50KB 이상~250KB 이하</li>
+                  </ul>
+                </div>
+                <div class="spec-block">
+                  <div class="spec-label">Safe Area <span class="badge-req">필수</span></div>
+                  <ul>
+                    <li>텍스트·로고·버튼 : 상단 50px · 하단 35px · 좌우 240px</li>
+                    <li>메인 오브젝트 : 좌우 225px 여백 (가변 확장 시 좌우 잘림 방지)</li>
+                  </ul>
+                  <img class="guide-img wide" src="assets/img/mobile-da-safearea.png" alt="모바일 DA Safe Area 예시 — 텍스트·로고·버튼 영역과 배경 영역" loading="lazy">
+                  <p class="guide-img-cap">Safe Area 예시 · 좌우 240px / 상단 50px · 하단 35px, 붉은 영역엔 텍스트·로고·버튼 배치 금지</p>
+                </div>
+                <div class="spec-block">
+                  <div class="spec-label">배경 <span class="badge-req">필수</span></div>
+                  <p>단색·패턴·그라데이션·이미지 모두 가능. <strong>투명 배경 불가</strong>, 화이트는 전체의 50% 이하. 제작 영역을 가득 채우며, 좌우 확장용 그라데이션 처리는 더 이상 하지 않습니다. AD Mute(84×32px)가 우측 상단에 자동 노출되니 가려지지 않게 구성합니다.</p>
+                </div>
+              </div>
+              <div class="guide-sec">
+                <h4>02. 텍스트 가이드</h4>
+                <div class="spec-block">
+                  <div class="spec-label">폰트 <span class="badge-rec">권장</span></div>
+                  <p>나눔·고딕 계열 권장. 손글씨·이탤릭체 지양. 장평은 100% 고정(조절 불가).</p>
+                </div>
+                <div class="spec-block">
+                  <div class="spec-label">크기 / 컬러</div>
+                  <ul>
+                    <li>텍스트 높이 : 최대 52px · 최소 22px</li>
+                    <li>문구 최대 4줄 (로고 제외)</li>
+                    <li>컬러 : 기본 포함 최대 3가지 (로고 제외)</li>
+                    <li>심의필 : 우측 하단 고정 · 높이 14px</li>
+                  </ul>
+                </div>
+              </div>`,
+          },
+          {
+            title: "스페셜 DA — 성과형 280",
+            note: "2025.07 · M 메인 · 누끼형 오브젝트+텍스트 PNG 1장 · 오브젝트 영역 260×280",
+            banners: [
+              { w: 750, h: 280, name: "스페셜 DA 280", token: "스페셜DA", note: "PNG 투명배경 · 250KB 이하", psd: "https://drive.google.com/uc?export=download&id=1Z09eQzpc6s-326-1tPEtHyMIpdnWZTbc" },
+            ],
+            details: `
+              <div class="guide-sec">
+                <h4>01. 오브젝트 가이드</h4>
+                <div class="spec-block">
+                  <div class="spec-label">Size <span class="badge-req">필수</span></div>
+                  <ul>
+                    <li>제작 사이즈 : <span class="hl">750×280 px</span></li>
+                    <li>파일 포맷 : PNG (투명 배경 처리 필수)</li>
+                    <li>파일 용량 : 최대 250KB</li>
+                    <li>필수 소재 : 오브젝트+텍스트 구성 PNG 1장</li>
+                  </ul>
+                </div>
+                <div class="spec-block">
+                  <div class="spec-label">오브젝트 <span class="badge-req">필수</span></div>
+                  <ul>
+                    <li>허용 영역 260×280px 내, 사용 면적 <strong>최소 25% ~ 최대 70%</strong></li>
+                    <li>인물·캐릭터 3개 이상이면 가로폭 최대 300px까지 허용</li>
+                    <li>로고 최소 면적 500px (유통업종은 판매처 로고/업체명 필수)</li>
+                    <li>썸네일형 : 최대 300×200(1.5:1) ~ 최소 200×200(1:1)</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="guide-sec">
+                <h4>02. 텍스트 가이드</h4>
+                <div class="spec-block">
+                  <div class="spec-label">광고 문구</div>
+                  <ul>
+                    <li>최대 3줄 (메인 2줄 + 서브 1줄)</li>
+                    <li>1줄 사용 시 텍스트 최대 높이 32px</li>
+                    <li>텍스트 영역 높이 최대 200px</li>
+                    <li>오브젝트–텍스트 영역 간격 30px 이상</li>
+                  </ul>
+                </div>
+                <div class="spec-block">
+                  <div class="spec-label">랜딩</div>
+                  <p>꺾쇠형 랜딩 아이콘 / 앱 랜딩형 CTA 버튼 / 행동 유도 문구 직접 입력 중 선택.</p>
+                </div>
+              </div>
+              <div class="guide-sec full">
+                <h4>03. 제작 참고</h4>
+                <div class="ex-row">
+                  <figure class="ex-fig">
+                    <img src="assets/img/special-guide-1.png" alt="스페셜 DA 280 — 투명 배경 처리" loading="lazy">
+                    <figcaption>투명 배경 처리 (PNG)</figcaption>
+                  </figure>
+                  <figure class="ex-fig">
+                    <img src="assets/img/special-guide-2.png" alt="스페셜 DA 280 — 텍스트 영역 40px 여백" loading="lazy">
+                    <figcaption>텍스트 영역 · 상·하 / 좌·우 40px 여백 준수</figcaption>
+                  </figure>
+                  <figure class="ex-fig">
+                    <img src="assets/img/special-guide-3.png" alt="스페셜 DA 280 — 구성 요소" loading="lazy">
+                    <figcaption>구성 요소 · 오브젝트 + 텍스트 + 랜딩아이콘(선택)</figcaption>
+                  </figure>
+                </div>
+              </div>
+              <div class="guide-sec full">
+                <h4>04. 노출 예시</h4>
+                <div class="ex-row">
+                  <figure class="ex-fig" style="max-width:460px">
+                    <img src="assets/img/examples/ex-special-280-exposure.png" alt="스페셜 DA 280 M 메인 노출 예시 — 라이트/다크 모드" loading="lazy">
+                    <figcaption>M 메인 노출 예시 (라이트 / 다크 모드)</figcaption>
+                  </figure>
+                </div>
+              </div>`,
+          },
+          {
+            title: "스마트채널 DA",
+            note: "2023.01 · 누끼형 오브젝트+카피 · PNG 투명배경만 · 카피 최대 2줄",
+            banners: [
+              { w: 750, h: 200, name: "스마트채널 200", token: "스마트채널DA", note: "오브젝트 영역 260×200 · 150KB 이하", psd: "https://drive.google.com/uc?export=download&id=1FVuiXAMKBtRvF0xJ9GmQZq2Z4ONy8kZL", details: SC_DETAILS("750×200", "260×200", "210×140") },
+              { w: 750, h: 160, name: "스마트채널 160", token: "스마트채널DA", note: "오브젝트 영역 260×160 · 150KB 이하", psd: "https://drive.google.com/uc?export=download&id=16aIcb773wV-gKr53owvCizXGRKVz4HA7", details: SC_DETAILS("750×160", "260×160", "195×130") },
+            ],
+          },
+          {
+            title: "작품홈 DA",
+            note: "ver1.3.2 · 네이버웹툰 '작품 페이지'에 노출 · 배경 2종 중 선택 — ① 색 배경(꽉 채움) ② 투명 배경(스마트채널과 동일)",
+            banners: [
+              { w: 750, h: 160, name: "작품홈 DA", token: "작품홈DA", note: "유색배경 / 투명배경(누끼) · PNG", psd: "https://drive.google.com/uc?export=download&id=1gNNBTFLpRmsT__dvyCw0IXGZ9HRG0FWq" },
+            ],
+            details: `
+              <div class="memo-box">
+                <div class="memo-title">📌 반려 사례 메모 <span class="memo-sub">— 실제 반려로 확인된 제한 (공식 가이드 미기재)</span></div>
+                <ul>
+                  <li>텍스트 내 박스 효과 삽입 금지</li>
+                  <li>텍스트 내 이모티콘 적용 금지 (특수문자에 한해서만 적용 가능)</li>
+                </ul>
+              </div>
+              <div class="guide-sec">
+                <h4>01. 이미지 가이드</h4>
+                <div class="spec-block">
+                  <div class="spec-label">Size <span class="badge-req">필수</span></div>
+                  <ul>
+                    <li>제작 사이즈 : <span class="hl">750×160 px</span></li>
+                    <li>파일 포맷 : PNG</li>
+                    <li>지면 : 네이버웹툰 작품홈</li>
+                  </ul>
+                </div>
+                <div class="spec-block">
+                  <div class="spec-label">배경 타입 (2종)</div>
+                  <ul>
+                    <li><strong>유색배경</strong> : 배경을 꽉 채운 형태 — 작품홈 전용</li>
+                    <li><strong>투명배경(누끼)</strong> : 스마트채널 DA와 동일한 규격·템플릿</li>
+                  </ul>
+                  <p>상단 '고정 UI 노출 영역'과 상·하·좌·우 최소 여백을 침범하지 않도록 구성합니다.</p>
+                </div>
+              </div>
+              <div class="guide-sec">
+                <h4>02. 제작 안내</h4>
+                <div class="spec-block">
+                  <div class="spec-label">투명배경 규격</div>
+                  <p>투명배경(누끼) 타입은 <strong>스마트채널 DA</strong> 가이드와 동일합니다 — 오브젝트 영역 260×160, 카피 최대 2줄, 로고 최소 500px 등.</p>
+                </div>
+                <div class="spec-block">
+                  <div class="spec-label">PSD 샘플</div>
+                  <p>유색배경 1종 + 투명배경 세트(기본형·강조형·하단고지문구형)가 PSD로 제공됩니다. (정식 제작 가이드 문서 미입수 — 세부 수치는 PSD 샘플 기준)</p>
+                </div>
+              </div>
+              <div class="guide-sec full">
+                <h4>03. 제작 참고</h4>
+                <div class="ex-row">
+                  <figure class="ex-fig" style="max-width:520px">
+                    <img src="assets/img/examples/ex-jakpumhome-color.png" alt="작품홈 DA 유색배경 제작 샘플" loading="lazy">
+                    <figcaption>유색배경 제작 샘플 · 상단 고정 UI 영역 / 상·하·좌·우 최소 여백 준수</figcaption>
+                  </figure>
+                </div>
+              </div>`,
+          },
+          {
+            title: "치지직 챗 캐치 배너",
+            note: "ver1.0 · 치지직(네이버 게임 스트리밍) 라이브/동영상 엔드",
+            banners: [
+              { w: 750, h: 160, name: "챗 캐치 배너", token: "치지직챗캐치", safe: { t: 10, b: 0, l: 20, r: 20 }, note: "JPG/JPEG · 200KB 이하" },
+            ],
+            details: `
+              <div class="guide-sec">
+                <h4>01. 이미지 가이드</h4>
+                <div class="spec-block">
+                  <div class="spec-label">Size <span class="badge-req">필수</span></div>
+                  <ul>
+                    <li>제작 사이즈 : <span class="hl">750×160 px</span></li>
+                    <li>파일 포맷 : JPG, JPEG</li>
+                    <li>파일 용량 : 200KB 이하</li>
+                  </ul>
+                </div>
+                <div class="spec-block">
+                  <div class="spec-label">배경 <span class="badge-req">필수</span></div>
+                  <p>BG 컬러를 별도로 지정하며 <strong>화이트 배경은 사용 불가</strong>. 큰 해상도에서 좌우에 여백이 생기면 전달한 컬러값이 적용되므로, <strong>좌·우·상단 여백에 동일한 컬러값(Hex)</strong>을 적용합니다.</p>
+                </div>
+                <div class="spec-block">
+                  <div class="spec-label">Safe Area <span class="badge-req">필수</span></div>
+                  <ul>
+                    <li>상단 여백 10px / 좌·우 여백 20px 최소 확보</li>
+                    <li>우측 상단 AD 배지가 시스템 자동 노출 — 해당 위치에 그래픽·텍스트 배치 지양</li>
+                  </ul>
+                </div>
+                <div class="spec-block">
+                  <div class="spec-label">제한 <span class="badge-req">필수</span></div>
+                  <ul>
+                    <li>테두리·배경(박스) 사용 불가</li>
+                    <li>비율 왜곡 / 저해상도 / 불분명한 크롭 불가</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="guide-sec">
+                <h4>02. 텍스트 가이드</h4>
+                <div class="spec-block">
+                  <div class="spec-label">폰트 / 컬러</div>
+                  <ul>
+                    <li>폰트 컬러는 3색 미만 (3개 이상 지양)</li>
+                    <li>시스템 폰트(바탕·굴림·돋움·궁서) 및 가독성 낮은 폰트 지양</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="guide-sec full">
+                <h4>03. 제작 참고</h4>
+                <div class="ex-row">
+                  <figure class="ex-fig" style="max-width:560px">
+                    <img src="assets/img/chzzk-chatcatch-guide.png" alt="치지직 챗 캐치 배너 제작 도식 — 750×160, 여백 10/20px, AD 배지 위치" loading="lazy">
+                    <figcaption>제작 도식 · 좌·우·상단 동일 Hex 컬러 / 상단 10px·좌우 20px 최소 여백 / 우측 AD 배지 영역</figcaption>
+                  </figure>
+                </div>
+              </div>`,
+          },
+          {
+            title: "MO 성과형 네이티브",
+            note: "2021.06 · 네이티브 썸네일 342×228 제작 · 텍스트는 시스템 입력(디자이너는 썸네일 이미지만 제작)",
+            banners: [
+              { w: 342, h: 228, name: "썸네일 이미지", token: "MO성과형네이티브", note: "1.5:1 · JPG/PNG · 100KB 이하" },
+            ],
+            details: `
+              <div class="guide-sec">
+                <h4>01. 이미지 가이드</h4>
+                <div class="spec-block">
+                  <div class="spec-label">Size <span class="badge-req">필수</span></div>
+                  <ul>
+                    <li>썸네일 이미지 : <span class="hl">342×228 px</span> (1.5:1)</li>
+                    <li>확장자 : jpg, jpeg, png</li>
+                    <li>파일 용량 : 100KB 이하</li>
+                  </ul>
+                  <p>노출 타입 3종(주제판 가로형·세로형, 베이직형) 모두 동일한 썸네일 사이즈를 사용합니다.</p>
+                </div>
+                <div class="spec-block">
+                  <div class="spec-label">제한 <span class="badge-req">필수</span></div>
+                  <ul>
+                    <li>테두리·여백을 사용한 이미지 불가</li>
+                    <li>여러 장이 분할되어 복잡한 이미지 불가</li>
+                    <li>저해상도·깨진 이미지 불가</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="guide-sec full">
+                <h4>02. 제작 참고</h4>
+                <div class="ex-row">
+                  <figure class="ex-fig" style="max-width:340px">
+                    <img src="assets/img/pc-native-ref.png" alt="MO 성과형 네이티브 구성 참고 — 썸네일 이미지(342×228)와 텍스트 영역" loading="lazy">
+                    <figcaption>구성 참고 · 디자이너는 <strong>썸네일 이미지(342×228)만 제작</strong>하며, 광고주명·카피·고지문구 등 텍스트는 시스템에 입력됩니다.</figcaption>
+                  </figure>
+                </div>
+              </div>
+              <div class="guide-sec full">
+                <h4>03. 노출 예시</h4>
+                <div class="ex-row">
+                  <figure class="ex-fig" style="max-width:560px">
+                    <img src="assets/img/examples/ex-pc-native.png" alt="MO 성과형 네이티브 노출 예시 — 주제판 세로타입 / 가로타입" loading="lazy">
+                    <figcaption>주제판 노출 예시 (세로타입 / 가로타입)</figcaption>
+                  </figure>
+                </div>
+              </div>`,
+          },
+          {
+            title: "네이버웹툰 빅배너",
+            note: "ver1.8.4 · PC/MW 뷰어 엔딩컷 · APP 뷰어 최하단 · 600×600 1종 등록 시 디바이스별 자동 리사이징",
+            banners: [
+              { w: 600, h: 600, name: "빅배너 (기본형)", token: "웹툰빅배너", note: "제작 사이즈 · JPG/PNG · 200KB 미만 · 테두리 필수" },
+            ],
+            details: `
+              <div class="guide-sec">
+                <h4>01. 이미지 가이드</h4>
+                <div class="spec-block">
+                  <div class="spec-label">Size <span class="badge-req">필수</span></div>
+                  <ul>
+                    <li>제작 사이즈 : <span class="hl">600×600 px</span></li>
+                    <li>파일 타입 : JPG, PNG</li>
+                    <li>파일 용량 : 200KB 미만</li>
+                  </ul>
+                  <p>600×600 한 가지 사이즈로 작업해 등록하면 PC·모바일 환경에 맞게 자동 리사이징되어 노출됩니다.</p>
+                </div>
+                <div class="spec-block">
+                  <div class="spec-label">Border <span class="badge-req">필수</span></div>
+                  <p>배너 이미지에는 굵기 <strong>1px / 컬러 #000000 / Alpha 15%</strong>의 테두리(border)를 반드시 포함해야 합니다.</p>
+                </div>
+                <div class="spec-block">
+                  <div class="spec-label">Color</div>
+                  <p>규격 내 자유롭게 구성하되 <strong>광고와 조화로운 배경을 반드시 삽입</strong>합니다. 이미지 / 단색(화이트·블랙 포함) / 패턴 배경 모두 가능하며, 그라데이션은 <strong>투톤으로만</strong> 구성하고 지나치게 채도 높은 컬러는 지양합니다.</p>
+                  <div class="swatches">
+                    <span style="background:#ff00aa"></span>
+                    <span style="background:#00c2d1"></span>
+                    <span style="background:#22c55e"></span>
+                    <span style="background:#ffe000"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="guide-sec">
+                <h4>02. 텍스트 가이드</h4>
+                <div class="spec-block">
+                  <div class="spec-label">Spec <span class="badge-rec">권장</span></div>
+                  <ul>
+                    <li>① 광고주 브랜드 로고</li>
+                    <li>② 소재를 설명하는 타이틀 혹은 서브카피</li>
+                    <li>③ 버튼 (클릭 유도)</li>
+                  </ul>
+                  <img class="guide-img" src="assets/img/webtoon-spec-sample.png" alt="웹툰 빅배너 샘플 — 로고/타이틀·서브카피/버튼 구성 예시" loading="lazy">
+                  <p class="guide-img-cap">샘플 배너 예시 (①로고 ②타이틀·서브카피 ③버튼)</p>
+                </div>
+                <div class="spec-block">
+                  <div class="spec-label">Size <span class="badge-rec">권장</span></div>
+                  <ul>
+                    <li>타이틀 : 최소 32pt</li>
+                    <li>서브 카피 : 최소 16pt</li>
+                    <li>심의필 : 14pt</li>
+                  </ul>
+                  <p>위 사이즈 이상으로 제작해야 모바일에서도 잘 보입니다. (해상도 72dpi 기준)</p>
+                  <img class="guide-img" src="assets/img/webtoon-text-size.png" alt="타이틀 32pt / 서브카피 16pt 크기 예시" loading="lazy">
+                  <p class="guide-img-cap">타이틀 32pt · 서브카피 16pt · 폰트 예) Rix고딕/DIN</p>
+                </div>
+                <div class="spec-block">
+                  <div class="spec-label">Color &amp; Layout</div>
+                  <p>텍스트는 기본 1종 + 포인트 컬러 2종 이내(총 3색 이내)를 권장합니다. 정렬은 되도록 한 방향으로 통일하면 광고 영역을 더 효율적으로 활용할 수 있습니다.</p>
+                </div>
+                <div class="spec-block">
+                  <div class="spec-label">Font</div>
+                  <p>폰트는 2가지 이내 권장. 영어·숫자는 추가 1종 사용 무방. 예) 한글 Rix고딕 / 영문·숫자 DIN</p>
+                </div>
+              </div>`,
+          },
+        ],
+      },
+    ];
+
+    function calcPreviewSize(w, h, maxW, maxH) {
+      const ratio = w / h;
+      let width, height;
+
+      if (ratio >= 1) {
+        width = Math.min(maxW, maxH * ratio);
+        height = width / ratio;
+        if (height > maxH) {
+          height = maxH;
+          width = height * ratio;
+        }
+      } else {
+        height = Math.min(maxH, maxW / ratio);
+        width = height * ratio;
+        if (width > maxW) {
+          width = maxW;
+          height = width / ratio;
+        }
+      }
+
+      return { width: Math.round(width), height: Math.round(height) };
+    }
+
+    const DOWNLOAD_ICON =
+      '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v8m0 0L4.5 6.5M8 10l3.5-3.5M2.5 13h11"/></svg>';
+
+    function renderCard(banner, guideId, details, platformName) {
+      const { width, height } = calcPreviewSize(banner.w, banner.h, 160, 110);
+      const note = banner.note ? `<p class="note">${banner.note}</p>` : "";
+      const psd = banner.psd
+        ? `<a class="psd-btn" href="${banner.psd}" target="_blank" rel="noopener">제작 PSD${DOWNLOAD_ICON}</a>`
+        : "";
+      const guideBtn = (guideId && details)
+        ? `<button class="size-guide-btn" type="button" aria-expanded="false" onclick="toggleSizeGuide('${guideId}', this)">제작 가이드<span class="chev">▾</span></button>`
+        : "";
+      // 매체명 포함 → 매체 간 동일 사이즈·이름 충돌 방지. label은 화면 표시용, token은 파일명용
+      const label = `${platformName ? platformName + " " : ""}${banner.name} ${banner.w}x${banner.h}`;
+      const token = banner.token || banner.name.replace(/\([^)]*\)/g, "").replace(/[^0-9A-Za-z가-힣]/g, "");
+      const safeAttr = banner.safe ? `${banner.safe.t},${banner.safe.b},${banner.safe.l},${banner.safe.r}` : "";
+      const cartBtn = `<button class="cart-btn" type="button" data-label="${label}" data-token="${token}" data-platform="${platformName || ""}" data-w="${banner.w}" data-h="${banner.h}" data-safe="${safeAttr}" onclick="toggleCart(this)">＋ 아트보드 담기</button>`;
+      // 실제 예시 이미지가 있으면(카카오 비즈보드 유형 등) 회색 미리보기 대신 이미지 표시
+      const preview = banner.img
+        ? `<img class="preview-img" src="${banner.img}" alt="${banner.name} 예시" loading="lazy">`
+        : `<div class="preview" style="width:${width}px;height:${height}px" aria-hidden="true"></div>`;
+      return `
+        <article class="card">
+          <div class="preview-wrap">
+            ${preview}
+          </div>
+          <p class="size">${banner.w}×${banner.h}</p>
+          <p class="name">${banner.name}</p>
+          ${note}
+          ${psd}
+          ${guideBtn}
+          ${cartBtn}
+        </article>
+      `;
+    }
+
+    function renderGroup(group, gid, platformName) {
+      const note = group.note ? `<span class="group-note">${group.note}</span>` : "";
+      const perSize = group.banners.some((b) => b.details);          // M 피드: 사이즈별 가이드
+      const sharedId = (!perSize && group.details) ? `${gid}-grp` : null; // 단일/묶음: 공통 가이드(모든 카드가 같은 패널)
+
+      const cards = group.banners
+        .map((b, i) => {
+          const id = perSize ? `${gid}-b${i}` : sharedId;
+          const details = perSize ? b.details : group.details;
+          return renderCard(b, id || undefined, details, platformName);
+        })
+        .join("");
+
+      let panels = "";
+      if (perSize) {
+        panels = group.banners
+          .map((b, i) =>
+            b.details ? `<div class="guide-panel" id="${gid}-b${i}"><div class="guide-body">${b.details}</div></div>` : ""
+          )
+          .join("");
+      } else if (sharedId) {
+        panels = `<div class="guide-panel" id="${sharedId}"><div class="guide-body">${group.details}</div></div>`;
+      }
+
+      return `
+        <div class="group">
+          <div class="group-header">
+            <h3 class="group-title">${group.title}</h3>
+            ${note}
+          </div>
+          <div class="card-grid">
+            ${cards}
+          </div>
+          ${panels}
+        </div>
+      `;
+    }
+
+    function toggleSizeGuide(id, btn) {
+      const panel = document.getElementById(id);
+      const group = btn.closest(".group");
+      const thisActive = btn.getAttribute("aria-expanded") === "true";
+      // 그룹 내 모든 버튼 비활성화
+      group.querySelectorAll('.size-guide-btn[aria-expanded="true"]').forEach((b) =>
+        b.setAttribute("aria-expanded", "false")
+      );
+      if (thisActive) {
+        panel.classList.remove("open"); // 같은 버튼 재클릭 → 닫기
+      } else {
+        // 다른 패널 닫고 대상 패널 열기 + 이 버튼 활성 (공통 패널이면 버튼만 전환)
+        group.querySelectorAll(".guide-panel.open").forEach((p) => { if (p !== panel) p.classList.remove("open"); });
+        panel.classList.add("open");
+        btn.setAttribute("aria-expanded", "true");
+        panel.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      }
+    }
+
+    // 평면(banners) 섹션 — 특정 사이즈에 details가 있으면 그 카드에 사이즈별 가이드 패널을 붙임
+    function renderFlat(platform) {
+      const gid = platform.id;
+      const perSize = platform.banners.some((b) => b.details);
+      const cards = platform.banners
+        .map((b, i) => renderCard(b, perSize && b.details ? `${gid}-b${i}` : undefined, b.details, platform.name))
+        .join("");
+      const panels = perSize
+        ? platform.banners
+            .map((b, i) =>
+              b.details ? `<div class="guide-panel" id="${gid}-b${i}"><div class="guide-body">${b.details}</div></div>` : ""
+            )
+            .join("")
+        : "";
+      return `<div class="group"><div class="card-grid">${cards}</div>${panels}</div>`;
+    }
+
+    function renderSection(platform) {
+      const guide = platform.guide
+        ? `<p class="section-meta">${platform.guide}</p>`
+        : "";
+      const count = platform.groups
+        ? platform.groups.reduce((n, g) => n + g.banners.length, 0)
+        : platform.banners.length;
+      const body = platform.groups
+        ? platform.groups.map((g, i) => renderGroup(g, `${platform.id}-g${i}`, platform.name)).join("")
+        : renderFlat(platform);
+      const status = platform.verified
+        ? '<span class="status-badge status-ok">공식 가이드 반영 ✓</span>'
+        : platform.standard
+        ? '<span class="status-badge status-std">표준 규격</span>'
+        : '<span class="status-badge status-tbd">참고용 · 검증 전</span>';
+      return `
+        <section class="section" id="${platform.id}">
+          <div class="section-header" onclick="toggleSection('${platform.id}')">
+            <div class="section-badge ${platform.badgeClass}">${platform.name.slice(0, 1)}</div>
+            <h2 class="section-title">${platform.name}</h2>
+            ${status}
+            <span class="section-count">${count}종</span>
+            <span class="section-chev-wrap"><span class="section-chev">▾</span></span>
+          </div>
+          <div class="section-body">
+            ${guide}
+            ${body}
+          </div>
+        </section>
+      `;
+    }
+
+    // 매체 섹션 접기/펼치기 — 상태는 localStorage에 저장해 새로고침해도 유지
+    const COLLAPSE_KEY = "cheatsheet-collapsed-sections";
+    function loadCollapsedSections() {
+      try {
+        return new Set(JSON.parse(localStorage.getItem(COLLAPSE_KEY) || "[]"));
+      } catch (e) {
+        return new Set();
+      }
+    }
+    function saveCollapsedSections(set) {
+      try {
+        localStorage.setItem(COLLAPSE_KEY, JSON.stringify([...set]));
+      } catch (e) {}
+    }
+    function toggleSection(id) {
+      const section = document.getElementById(id);
+      const collapsed = loadCollapsedSections();
+      if (collapsed.has(id)) {
+        collapsed.delete(id);
+        section.classList.remove("collapsed");
+      } else {
+        collapsed.add(id);
+        section.classList.add("collapsed");
+      }
+      saveCollapsedSections(collapsed);
+    }
+
+    document.getElementById("app").innerHTML = platforms.map(renderSection).join("");
+
+    // 새로고침 후에도 이전에 접어둔 섹션 상태 복원. 첫 방문(저장값 없음)엔 전체 접힌 채로 시작
+    (() => {
+      let isFirstVisit;
+      try {
+        isFirstVisit = localStorage.getItem(COLLAPSE_KEY) === null;
+      } catch (e) {
+        isFirstVisit = false;
+      }
+      const collapsed = isFirstVisit ? new Set(platforms.map((p) => p.id)) : loadCollapsedSections();
+      if (isFirstVisit) saveCollapsedSections(collapsed);
+      collapsed.forEach((id) => {
+        const section = document.getElementById(id);
+        if (section) section.classList.add("collapsed");
+      });
+    })();
+
+    // 날짜 입력칸 placeholder에 오늘 날짜 표시 — 비워두면 이 값이 파일명에 자동 사용됨
+    document.getElementById("cartDate").placeholder = todayYYMMDD();
+
+    // 토스트 알림 (포토샵 스크립트 다운로드 완료 메시지 등에 사용)
+    let toastTimer;
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      toast.textContent = msg;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 1600);
+    }
+
+    // 아트보드 바구니 — 담은 사이즈들로 포토샵 스크립트(.jsx) 생성
+    const cart = [];
+
+    function toggleCart(btn) {
+      const label = btn.dataset.label;
+      const i = cart.findIndex((c) => c.label === label);
+      if (i >= 0) {
+        cart.splice(i, 1);
+      } else {
+        cart.push({
+          label,
+          token: btn.dataset.token,
+          platform: btn.dataset.platform,
+          w: Number(btn.dataset.w),
+          h: Number(btn.dataset.h),
+          safe: btn.dataset.safe ? btn.dataset.safe.split(",").map(Number) : null, // [상, 하, 좌, 우]
+        });
+      }
+      syncCartButtons();
+      renderCart();
+    }
+
+    function removeFromCart(label) {
+      const i = cart.findIndex((c) => c.label === label);
+      if (i >= 0) cart.splice(i, 1);
+      syncCartButtons();
+      renderCart();
+    }
+
+    function clearCart() {
+      cart.length = 0;
+      syncCartButtons();
+      renderCart();
+    }
+
+    function syncCartButtons() {
+      document.querySelectorAll(".cart-btn").forEach((b) => {
+        const added = cart.some((c) => c.label === b.dataset.label);
+        b.classList.toggle("added", added);
+        b.textContent = added ? "✓ 담김" : "＋ 아트보드 담기";
+      });
+    }
+
+    function renderCart() {
+      const bar = document.getElementById("cartbar");
+      bar.hidden = cart.length === 0;
+      document.body.classList.toggle("cart-open", cart.length > 0);
+      document.getElementById("cartCount").textContent = cart.length;
+      document.getElementById("cartChips").innerHTML = cart
+        .map(
+          (c) =>
+            `<span class="cart-chip">${c.label}<button type="button" onclick="removeFromCart('${c.label.replace(/'/g, "\\'")}')" aria-label="${c.label} 빼기">✕</button></span>`
+        )
+        .join("");
+    }
+
+    // 파일명 규칙: 오늘날짜_브랜드명_소구점_매체명_상품명_사이즈 (예: 260707_브랜드명_소구점_네이버_스페셜DA_750x280)
+    function fileToken(value, fallback) {
+      const t = (value || "").trim().replace(/[\s_/\\:*?"<>|]+/g, ""); // 구분자·파일명 금지 문자 제거
+      return t || fallback;
+    }
+
+    function artboardName(item, date, brand, appeal) {
+      return `${date}_${brand}_${appeal}_${item.platform}_${item.token}_${item.w}x${item.h}`;
+    }
+
+    function describeSafe(s) {
+      const [t, b, l, r] = s;
+      if (t === b && b === l && l === r) return `여백 ${t}px`;
+      const parts = [];
+      if (t) parts.push(`상${t}`);
+      if (b) parts.push(`하${b}`);
+      if (l) parts.push(`좌${l}`);
+      if (r) parts.push(`우${r}`);
+      return parts.join("·") + "px";
+    }
+
+    function todayYYMMDD() {
+      const now = new Date();
+      return (
+        String(now.getFullYear() % 100).padStart(2, "0") +
+        String(now.getMonth() + 1).padStart(2, "0") +
+        String(now.getDate()).padStart(2, "0")
+      );
+    }
+
+    // ag-psd로 아트보드 포함 PSD를 브라우저에서 직접 생성 (담은 사이즈를 가로로 나열)
+    function buildPsd(items) {
+      const GAP = 100;
+      let totalW = 0, maxH = 0;
+      items.forEach((it, i) => { totalW += it.w + (i > 0 ? GAP : 0); if (it.h > maxH) maxH = it.h; });
+
+      const children = [];
+      let x = 0;
+      items.forEach((it) => {
+        const abChildren = [];
+        // Safe Area — 여백을 빨간 반투명(45%)으로 굽고 가운데는 비움 (내보내기 전 삭제 레이어)
+        if (it.safe) {
+          const c = document.createElement("canvas");
+          c.width = it.w; c.height = it.h;
+          const ctx = c.getContext("2d");
+          ctx.fillStyle = "rgba(234,51,35,0.45)";
+          ctx.fillRect(0, 0, it.w, it.h);
+          const mt = it.safe[0], mb = it.safe[1], ml = it.safe[2], mr = it.safe[3];
+          ctx.clearRect(ml, mt, it.w - ml - mr, it.h - mt - mb);
+          abChildren.push({
+            name: "※ Safe Area " + it.safeDesc + " (내보내기 전 삭제)",
+            canvas: c,
+            left: x, top: 0,
+          });
+        }
+        children.push({
+          name: it.name,
+          artboard: {
+            rect: { top: 0, left: x, bottom: it.h, right: x + it.w },
+            presetName: it.name,
+            color: { r: 255, g: 255, b: 255, a: 255 }, // 아트보드 배경 흰색
+          },
+          children: abChildren,
+        });
+        x += it.w + GAP;
+      });
+
+      return agPsd.writePsd({
+        width: totalW || 1,
+        height: maxH || 1,
+        children: children,
+        artboards: { count: items.length },
+      });
+    }
+
+    function downloadPsd() {
+      if (!cart.length) return;
+      if (typeof agPsd === "undefined" || !agPsd.writePsd) {
+        showToast("PSD 모듈 로드 실패 · 인터넷 연결 후 새로고침하세요");
+        return;
+      }
+      const date = fileToken(document.getElementById("cartDate").value, todayYYMMDD());
+      const brand = fileToken(document.getElementById("cartBrand").value, "브랜드명");
+      const appeal = fileToken(document.getElementById("cartAppeal").value, "소구점");
+      const items = cart.map((c) => ({
+        name: artboardName(c, date, brand, appeal),
+        w: c.w,
+        h: c.h,
+        safe: c.safe,
+        safeDesc: c.safe ? describeSafe(c.safe) : "",
+      }));
+      const media = [...new Set(cart.map((c) => c.platform))].join("+");
+      const baseName = `${date}_${brand}_${appeal}_${media}_${cart.length}종`;
+      let buffer;
+      try {
+        buffer = buildPsd(items);
+      } catch (e) {
+        showToast("PSD 생성 오류: " + e.message);
+        return;
+      }
+      const blob = new Blob([buffer], { type: "application/octet-stream" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = baseName + ".psd";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 3000);
+      showToast("PSD 다운로드됨 · 더블클릭으로 열기");
+    }
+
+  </script>
+</body>
+</html>
